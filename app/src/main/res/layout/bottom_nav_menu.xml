@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomNav"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:orientation="horizontal"
+    android:background="?android:attr/windowBackground"
+    android:elevation="30dp"
+    android:weightSum="4">
+
+    <!-- BERANDA (ACTIVE) -->
+    <LinearLayout
+        android:id="@+id/navHome"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/icHome"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_home"
+            app:tint="@color/text" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtHome"
+            android:gravity="center"
+            android:text="Beranda"
+            android:textSize="12sp"
+            android:textColor="@color/text"/>
+    </LinearLayout>
+
+    <!-- SEARCH -->
+    <LinearLayout
+        android:id="@+id/navSearch"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/icSearch"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_search"
+            app:tint="@color/text" />
+
+        <TextView
+            android:id="@+id/txtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Search"
+            android:textSize="12sp"
+            android:textColor="@color/text"/>
+    </LinearLayout>
+
+    <!-- MAINTENANCE -->
+    <LinearLayout
+        android:id="@+id/navMaintenance"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/icMaintenance"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_maintenance"
+            app:tint="@color/text" />
+
+        <TextView
+            android:id="@+id/txtMaintenance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Maintenance"
+            android:textSize="12sp"
+            android:textColor="@color/text"/>
+    </LinearLayout>
+
+    <!-- ACCOUNT -->
+    <LinearLayout
+        android:id="@+id/navAccount"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/icAccount"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_account"
+            app:tint="@color/text" />
+
+        <TextView
+            android:id="@+id/txtAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Account"
+            android:textSize="12sp"
+            android:textColor="@color/text"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?android:attr/windowBackground">
+
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:elevation="30dp"
+        android:background="?attr/colorPrimary"
+        android:titleTextColor="#000000"
+        app:navigationIcon="@drawable/ic_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Cabang -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCabang"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        android:background="@color/bg_card"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/tvCabang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/namaCabang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Cabang"
+                android:textColor="@color/text"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/alamatCabang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Alamat Cabang"
+                android:textSize="12sp"
+                android:textColor="@color/text_grey"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tvDivisi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        android:background="@color/bg_card"
+        app:layout_constraintTop_toBottomOf="@id/cardCabang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvNamaDivisi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="Nama Divisi"
+                android:textColor="@color/text"/>
+
+            <TextView
+                android:id="@+id/tvSpace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:text="-"
+                android:textColor="@color/text"/>
+
+            <TextView
+                android:id="@+id/tvRuanganDivisi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ruangan"
+                android:textColor="@color/text"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/txtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvDivisi">
+        <!-- Section Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Asset"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:textColor="@color/text"
+            android:textStyle="bold"/>
+        <ImageView
+            android:id="@+id/icDeleteAsset"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_delete"
+            android:contentDescription="Icon delete asset"/>
+    </LinearLayout>
+    <!-- Content Scroll -->
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintTop_toBottomOf="@id/txtTitle"
+        app:layout_constraintBottom_toTopOf="@id/btnAddAsset">
+        <!-- List Asset -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAsset"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:attr/windowBackground"/>
+    </ScrollView>
+
+    <!-- Filter Chip (Horizontal Scroll) -->
+    <HorizontalScrollView
+        android:id="@+id/scrollChip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:padding="8dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            android:singleLine="true"
+            app:chipSpacingHorizontal="8dp">
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipSemua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="Semua"
+                android:checkable="true"
+                android:clickable="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/etLaptop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Laptop"
+                android:layout_marginRight="15dp"
+                android:checkable="true"
+                android:clickable="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/etPC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PC"
+                android:layout_marginRight="15dp"
+                android:checkable="true"
+                android:clickable="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/etPrinter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="Printer"
+                android:checkable="true"
+                android:clickable="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/etTelepon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="Telepon"
+                android:checkable="true"
+                android:clickable="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/etMeja"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="Meja"
+                android:checkable="true"
+                android:clickable="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/etKursi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="Kursi"
+                android:checkable="true"
+                android:clickable="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/etLemari"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="Lemari"
+                android:checkable="true"
+                android:clickable="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/etLainnya"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:text="Lainnya"
+                android:checkable="true"
+                android:clickable="true" />
+
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
+
+
+    <!-- FAB -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAddAsset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="Tambah asset"
+        android:src="@drawable/ic_add"
+
+        app:backgroundTint="?attr/colorPrimary"
+        app:tint="@color/text"
+
+        app:elevation="0dp"
+        app:pressedTranslationZ="0dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

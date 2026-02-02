@@ -1,0 +1,17 @@
+<resources>
+
+    <style name="Theme.BankAssets" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Warna utama gelap -->
+        <item name="colorPrimary">#1E3962</item>
+        <item name="colorPrimaryVariant">#1565C0</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+
+        <!-- Background gelap -->
+        <item name="android:windowBackground">#757575</item>
+
+        <!-- Status & Nav Bar -->
+        <item name="android:statusBarColor">#1E3962</item>
+        <item name="android:navigationBarColor">#1E3962</item>
+    </style>
+
+</resources>

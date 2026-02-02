@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">BankAssets</string>
+    <string name="theme_mode">Theme Mode</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="notification">Notification</string>
+    <string name="accessibility">Accessibility</string>
+    <string name="about_us">About Us</string>
+    <string name="default_web_client_id">ISI_DARI_FIREBASE_CONSOLE</string>
+</resources>
