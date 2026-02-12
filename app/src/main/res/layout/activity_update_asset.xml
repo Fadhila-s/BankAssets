@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:attr/windowBackground">
@@ -87,7 +88,6 @@
                         android:focusable="false"
                         android:clickable="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
-
                 <ImageView
                     android:id="@+id/icDropdownKondisi"
                     android:layout_width="30dp"
@@ -103,6 +103,20 @@
                     android:src="@drawable/ic_dropdown"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
             </FrameLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Person In Change"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Button Add -->
             <com.google.android.material.button.MaterialButton

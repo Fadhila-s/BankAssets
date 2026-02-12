@@ -20,6 +20,7 @@ import com.example.bankassets.adapter.AssetAdapter;
 import com.example.bankassets.adapter.MaintenanceAdapter;
 import com.example.bankassets.model.AssetModel;
 import com.example.bankassets.utils.AssetNotificationChecker;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -76,6 +77,16 @@ public class MaintenanceActivity extends BaseActivity {
         icDropdownDivisi.setOnClickListener(v -> showDivisiDropdown());
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(MaintenanceActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -186,6 +197,7 @@ public class MaintenanceActivity extends BaseActivity {
                                     obj.getString("nama_jenis"),
                                     obj.getString("kondisi_asset"),
                                     obj.getString("kendala_asset"),
+                                    obj.getString("pic_asset"),
                                     selectedIdDivisi
                             ));
                         }

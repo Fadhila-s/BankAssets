@@ -2,16 +2,16 @@
 
     <style name="Theme.BankAssets" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Warna utama -->
-        <item name="colorPrimary">#29A8F0</item>
-        <item name="colorPrimaryVariant">#4FC3F7</item>
+        <item name="colorPrimary">#5ABEE7</item>
+        <item name="colorPrimaryVariant">#5ABEE7</item>
         <item name="colorOnPrimary">#FFFFFF</item>
 
         <!-- Background -->
         <item name="android:windowBackground">#FFFFFF</item>
 
         <!-- Status & Nav Bar -->
-        <item name="android:statusBarColor">#29A8F0</item>
-        <item name="android:navigationBarColor">#29A8F0</item>
+        <item name="android:statusBarColor">#5ABEE7</item>
+        <item name="android:navigationBarColor">#5ABEE7</item>
     </style>
 
 </resources>

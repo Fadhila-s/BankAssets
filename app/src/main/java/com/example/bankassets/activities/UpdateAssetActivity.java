@@ -27,6 +27,8 @@ public class UpdateAssetActivity extends BaseActivity {
 
     private TextInputEditText etKendala;
     private MaterialAutoCompleteTextView ddKondisiAsset;
+    private TextInputEditText etPic;
+
     private MaterialButton btnUpdate;
 
     private ImageView icDropdownKondisi;
@@ -43,6 +45,7 @@ public class UpdateAssetActivity extends BaseActivity {
         toolbar.setNavigationOnClickListener(v -> finish());
 
         etKendala     = findViewById(R.id.etKendala);
+        etPic         = findViewById(R.id.etPic);
         ddKondisiAsset = findViewById(R.id.etKondisiAsset);
 
         btnUpdate = findViewById(R.id.btnSave);
@@ -57,6 +60,7 @@ public class UpdateAssetActivity extends BaseActivity {
         }
 
         etKendala.setText(getIntent().getStringExtra("kendala"));
+        etPic.setText(getIntent().getStringExtra("pic"));
         ddKondisiAsset.setText(
                 getIntent().getStringExtra("kondisi_asset"),
                 false
@@ -111,6 +115,7 @@ public class UpdateAssetActivity extends BaseActivity {
                 params.put("id_asset", idAsset);
                 params.put("kondisi_asset", ddKondisiAsset.getText().toString());
                 params.put("kendala_asset", etKendala.getText().toString());
+                params.put("pic_asset", etPic.getText().toString());
                 return params;
             }
         };

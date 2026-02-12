@@ -65,6 +65,7 @@ public class MaintenanceAdapter extends RecyclerView.Adapter<MaintenanceAdapter.
         holder.tvSpesifikasi.setText(model.getSpesifikasi());
         holder.tvKendala.setText(model.getKendala());
         holder.tvKondisi.setText(model.getKondisi());
+        holder.tvPic.setText(model.getPic());
 
         // Status color
         KondisiAssetColor.setKondisiColor(holder.tvKondisi, model.getKondisi());
@@ -75,6 +76,7 @@ public class MaintenanceAdapter extends RecyclerView.Adapter<MaintenanceAdapter.
             intent.putExtra("id_asset", model.getId());
             intent.putExtra("kondisi_asset", model.getKondisi());
             intent.putExtra("kendala_asset", model.getKendala());
+            intent.putExtra("pic_asset", model.getPic());
             ((Activity) context).startActivityForResult(intent, 101);
         });
 
@@ -93,7 +95,7 @@ public class MaintenanceAdapter extends RecyclerView.Adapter<MaintenanceAdapter.
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardRoot;
-        TextView tvNama, tvSpesifikasi, tvKendala, tvKondisi, tvJenis;
+        TextView tvNama, tvSpesifikasi, tvKendala, tvPic, tvKondisi, tvJenis;
         ImageView ubahKondisiAsset;
 
         ViewHolder(@NonNull View itemView) {
@@ -102,6 +104,7 @@ public class MaintenanceAdapter extends RecyclerView.Adapter<MaintenanceAdapter.
             tvNama = itemView.findViewById(R.id.etNamaAsset);
             tvSpesifikasi = itemView.findViewById(R.id.etSpesifikasi);
             tvKendala = itemView.findViewById(R.id.etKendala);
+            tvPic = itemView.findViewById(R.id.etPic);
             tvKondisi = itemView.findViewById(R.id.etKondisiAsset);
             tvJenis = itemView.findViewById(R.id.tvJenisAsset);
             ubahKondisiAsset = itemView.findViewById(R.id.ubahKondisiAsset);

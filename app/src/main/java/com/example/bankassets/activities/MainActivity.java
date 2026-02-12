@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -63,13 +64,30 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         getOnBackPressedDispatcher().addCallback(this,
-                new OnBackPressedCallback(true) {
+                new androidx.activity.OnBackPressedCallback(true) {
+
+                    private boolean doubleBackToExitPressedOnce = false;
+
                     @Override
                     public void handleOnBackPressed() {
-                        finishAffinity(); // keluar aplikasi
+
+                        if (doubleBackToExitPressedOnce) {
+                            finishAffinity();
+                            return;
+                        }
+
+                        doubleBackToExitPressedOnce = true;
+
+                        Toast.makeText(MainActivity.this,
+                                "Tekan sekali lagi untuk keluar",
+                                Toast.LENGTH_SHORT).show();
+
+                        new android.os.Handler().postDelayed(() ->
+                                        doubleBackToExitPressedOnce = false,
+                                2000
+                        );
                     }
                 });
-
 
         setupBottomNav("home");
 
@@ -240,6 +258,7 @@ public class MainActivity extends BaseActivity {
                                     obj.getString("nama_jenis"),
                                     obj.getString("kondisi_asset"),
                                     obj.getString("kendala_asset"),
+                                    obj.getString("pic_asset"),
                                     idCabang
                             );
 

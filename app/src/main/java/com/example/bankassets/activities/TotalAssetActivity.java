@@ -35,9 +35,15 @@ public class TotalAssetActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.total_asset);
 
-        // ===== Toolbar =====
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationOnClickListener(v -> finish());
+
+        toolbar.setNavigationOnClickListener(v -> {
+            // Kembali ke MainActivity
+            Intent intent = new Intent(TotalAssetActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            finish();
+        });
 
         // ===== View =====
         rvAsset = findViewById(R.id.rvAsset);

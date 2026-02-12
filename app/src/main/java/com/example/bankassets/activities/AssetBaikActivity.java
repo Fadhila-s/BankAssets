@@ -35,7 +35,14 @@ public class AssetBaikActivity extends BaseActivity {
         setContentView(R.layout.asset_baik);
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationOnClickListener(v -> finish());
+
+        toolbar.setNavigationOnClickListener(v -> {
+            // Kembali ke MainActivity
+            Intent intent = new Intent(AssetBaikActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            finish();
+        });
 
         rvAsset = findViewById(R.id.rvAsset);
         tvAlamatCabang = findViewById(R.id.alamatCabang);

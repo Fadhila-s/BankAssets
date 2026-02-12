@@ -38,15 +38,15 @@
         <activity android:name=".activities.TambahAssetActivity"/>
         <activity android:name=".activities.UpdateAssetActivity"/>
         <activity android:name=".activities.TambahMaintenanceActivity"/>
-        <activity
-            android:name=".activities.LoginActivity"
-            android:theme="@style/Theme.BankAssets"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustPan"
+        <activity android:name=".activities.LoginActivity"/>
+        <activity android:name=".activities.SplashScreen"
             android:exported="true">
+
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
     </application>
 </manifest>

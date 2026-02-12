@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class TambahAssetActivity extends BaseActivity {
 
-    private TextInputEditText etNamaAsset, etSpesifikasi, etKendala;
+    private TextInputEditText etNamaAsset, etSpesifikasi, etKendala, etPic;
     private MaterialAutoCompleteTextView ddJenisAsset, ddKondisiAsset;
     private MaterialButton btnSimpan;
 
@@ -51,6 +51,7 @@ public class TambahAssetActivity extends BaseActivity {
         etNamaAsset   = findViewById(R.id.etNamaAsset);
         etSpesifikasi = findViewById(R.id.etSpesifikasi);
         etKendala     = findViewById(R.id.etKendala);
+        etPic         = findViewById(R.id.etPic);
 
         ddJenisAsset   = findViewById(R.id.etJenisAsset);
         ddKondisiAsset = findViewById(R.id.etKondisiAsset);
@@ -118,6 +119,7 @@ public class TambahAssetActivity extends BaseActivity {
         String nama   = etNamaAsset.getText().toString().trim();
         String spek   = etSpesifikasi.getText().toString().trim();
         String kendala= etKendala.getText().toString().trim();
+        String pic    = etPic.getText().toString().trim();
         String kondisi= ddKondisiAsset.getText().toString().trim();
 
         if (nama.isEmpty() || idJenisTerpilih == null || kondisi.isEmpty()) {
@@ -129,6 +131,7 @@ public class TambahAssetActivity extends BaseActivity {
                 Request.Method.POST,
                 Db_Contract.urlAddAsset,
                 response -> {
+                    Log.d("RESPONSE_SERVER", response);
                     try {
                         JSONObject obj = new JSONObject(response);
                         if ("success".equals(obj.getString("status"))) {
@@ -139,6 +142,7 @@ public class TambahAssetActivity extends BaseActivity {
                             Toast.makeText(this, "Gagal menambah asset", Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
+                        Log.e("JSON_ERROR", e.toString());
                         Toast.makeText(this, "Response tidak valid", Toast.LENGTH_SHORT).show();
                     }
                 },
@@ -151,6 +155,7 @@ public class TambahAssetActivity extends BaseActivity {
                 p.put("nama_asset", nama);
                 p.put("spesifikasi_asset", spek);
                 p.put("kendala_asset", kendala);
+                p.put("pic_asset", pic);
                 p.put("kondisi_asset", kondisi);
                 p.put("id_jenis", idJenisTerpilih); // ✅ BENAR
                 return p;

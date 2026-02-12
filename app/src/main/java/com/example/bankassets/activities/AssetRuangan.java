@@ -74,7 +74,14 @@ public class AssetRuangan extends BaseActivity {
         chipSemua.setChecked(true);
 
         MaterialToolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setNavigationOnClickListener(v -> finish());
+
+        toolbar.setNavigationOnClickListener(v -> {
+            // Kembali ke MainActivity
+            Intent intent = new Intent(AssetRuangan.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            finish();
+        });
 
         // ===== RecyclerView =====
         assetList = new ArrayList<>();
@@ -157,6 +164,7 @@ public class AssetRuangan extends BaseActivity {
                                     obj.getString("nama_jenis"),
                                     obj.getString("kondisi_asset"),
                                     obj.getString("kendala_asset"),
+                                    obj.getString("pic_asset"),
                                     idDivisi
                             ));
                         }

@@ -45,6 +45,8 @@ public class LoginActivity extends BaseActivity {
     private static final String PREF_NAME = "login_pref";
     private static final String KEY_REMEMBER = "remember";
     private static final String PREF_USER  = "pref_user";
+    private SharedPreferences accountPref;
+
     private static final int RC_SIGN_IN = 100;
 
     @Override
@@ -58,6 +60,8 @@ public class LoginActivity extends BaseActivity {
         // ===== INIT PREF =====
         loginPref = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         userPref  = getSharedPreferences(PREF_USER, MODE_PRIVATE);
+
+        accountPref = getSharedPreferences("pref_account", MODE_PRIVATE);
 
         // ===== AUTO LOGIN (AMAN) =====
         if (loginPref.getBoolean(KEY_REMEMBER, false)
@@ -124,6 +128,10 @@ public class LoginActivity extends BaseActivity {
                                     .putString("id_user", idUser)
                                     .putString("username", username)
                                     .putString("email", emailRes)
+                                    .apply();
+
+                            accountPref.edit()
+                                    .putBoolean("is_logged_in", true)
                                     .apply();
                             goToMain();
                         } else {
@@ -198,6 +206,10 @@ public class LoginActivity extends BaseActivity {
 
                             loginPref.edit()
                                     .putBoolean(KEY_REMEMBER, true)
+                                    .apply();
+
+                            accountPref.edit()
+                                    .putBoolean("is_logged_in", true)
                                     .apply();
 
                             goToMain();

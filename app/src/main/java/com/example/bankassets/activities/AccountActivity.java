@@ -44,10 +44,46 @@ public class AccountActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
+        LinearLayout logoutLayout = findViewById(R.id.container6);
+
+        logoutLayout.setOnClickListener(v -> {
+
+            new androidx.appcompat.app.AlertDialog.Builder(AccountActivity.this)
+                    .setTitle("Konfirmasi Logout")
+                    .setMessage("Yakin ingin logout dari akun?")
+                    .setCancelable(false)
+
+                    .setPositiveButton("Ya", (dialog, which) -> {
+
+                        // Hapus login lama
+                        SharedPreferences loginPref =
+                                getSharedPreferences("login_pref", MODE_PRIVATE);
+                        loginPref.edit().clear().apply();
+
+                        // 🔥 Update flag untuk Splash
+                        SharedPreferences accountPref =
+                                getSharedPreferences("pref_account", MODE_PRIVATE);
+                        accountPref.edit()
+                                .putBoolean("is_logged_in", false)
+                                .apply();
+
+                        // Pindah ke Login
+                        Intent intent = new Intent(AccountActivity.this, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    })
+
+                    .setNegativeButton("Tidak", (dialog, which) -> {
+                        dialog.dismiss();
+                    })
+
+                    .show();
+        });
+
+
         userPref = getSharedPreferences("pref_user", MODE_PRIVATE);
 
-        // ===== INIT VIEW =====
-        toolbar = findViewById(R.id.toolbar);
         cardContainer = findViewById(R.id.cardContainer);
 
         usernameTV = findViewById(R.id.Username);
@@ -134,6 +170,15 @@ public class AccountActivity extends BaseActivity {
         emailTV.setText(email.isEmpty() ? "unknown@email.com" : email);
         icProfileTV.setText(username.isEmpty() ? "?" : String.valueOf(username.charAt(0)).toUpperCase());
         setupBottomNav("account");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(AccountActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(intent);
+        finish();
     }
 
     private boolean isSystemDarkMode() {

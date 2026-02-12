@@ -25,6 +25,7 @@ import com.example.bankassets.Db_Contract;
 import com.example.bankassets.R;
 import com.example.bankassets.adapter.AssetAdapter;
 import com.example.bankassets.model.AssetModel;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -135,6 +136,10 @@ public class SearchActivity extends BaseActivity {
             etSearch.clearFocus();
         } else {
             super.onBackPressed();
+            Intent intent = new Intent(SearchActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -259,6 +264,7 @@ public class SearchActivity extends BaseActivity {
                                     obj.getString("nama_jenis"),
                                     obj.getString("kondisi_asset"),
                                     obj.getString("kendala_asset"),
+                                    obj.getString("pic_asset"),
                                     selectedIdDivisi
                             ));
                         }

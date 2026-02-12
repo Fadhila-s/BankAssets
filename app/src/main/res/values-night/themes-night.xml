@@ -3,7 +3,7 @@
     <style name="Theme.BankAssets" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Warna utama gelap -->
         <item name="colorPrimary">#1E3962</item>
-        <item name="colorPrimaryVariant">#1565C0</item>
+        <item name="colorPrimaryVariant">#5ABEE7</item>
         <item name="colorOnPrimary">#FFFFFF</item>
 
         <!-- Background gelap -->
