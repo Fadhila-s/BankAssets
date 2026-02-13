@@ -164,7 +164,7 @@
                         android:background="@android:color/transparent"
                         android:enabled="false"
                         android:focusable="false"
-                        android:hint="Cari aset..."
+                        android:hint="Cari asset by Nama..."
                         android:paddingLeft="20dp"
                         android:textColor="@color/text"
                         android:textSize="14dp"
@@ -189,6 +189,7 @@
             android:id="@+id/rvAsset"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
             android:layout_marginTop="20dp"
             android:background="?android:attr/windowBackground"/>
     </ScrollView>

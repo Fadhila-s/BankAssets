@@ -258,6 +258,7 @@ public class MainActivity extends BaseActivity {
                                     obj.getString("nama_jenis"),
                                     obj.getString("kondisi_asset"),
                                     obj.getString("kendala_asset"),
+                                    obj.getString("status_penggunaan"),
                                     obj.getString("pic_asset"),
                                     idCabang
                             );

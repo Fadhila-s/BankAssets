@@ -12,6 +12,7 @@ public class AssetModel implements Serializable {
     private String namaJenis;
     private String kondisi;
     private String kendala;
+    private String statusPenggunaan;
     private String pic;
     private String idDivisi;
 
@@ -21,7 +22,7 @@ public class AssetModel implements Serializable {
 
     public AssetModel(String idAsset, String nama, String spesifikasi,
                       String idJenis, String namaJenis,
-                      String kondisi, String kendala, String pic, String idDivisi) {
+                      String kondisi, String kendala, String statusPenggunaan, String pic, String idDivisi) {
         this.idAsset = idAsset;
         this.nama = nama;
         this.spesifikasi = spesifikasi;
@@ -29,6 +30,7 @@ public class AssetModel implements Serializable {
         this.namaJenis = namaJenis;
         this.kondisi = kondisi;
         this.kendala = kendala;
+        this.statusPenggunaan = statusPenggunaan;
         this.pic = pic;
         this.idDivisi = idDivisi;
 
@@ -60,6 +62,10 @@ public class AssetModel implements Serializable {
 
     public String getKendala() {
         return kendala;
+    }
+
+    public String getStatusPenggunaan() {
+        return statusPenggunaan;
     }
 
     public String getPic() {

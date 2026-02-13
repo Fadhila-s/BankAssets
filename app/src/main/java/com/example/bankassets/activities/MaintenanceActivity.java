@@ -1,9 +1,15 @@
 package com.example.bankassets.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,12 +38,16 @@ import java.util.Map;
 
 public class MaintenanceActivity extends BaseActivity {
 
+    private EditText etSearch;
+    private LinearLayout containerSearch;
     private TextView tvNamaDivisi, tvRuanganDivisi;
     private ImageView icDropdownDivisi;
     private RecyclerView rvAsset;
 
     private ArrayList<AssetModel> assetList;
     private MaintenanceAdapter adapter;
+
+    private boolean isSearchActive = false;
 
     private String selectedIdDivisi = "";
     private String idCabangAktif;
@@ -53,6 +63,9 @@ public class MaintenanceActivity extends BaseActivity {
         tvRuanganDivisi = findViewById(R.id.tvRuanganDivisi);
         icDropdownDivisi = findViewById(R.id.icDropdownDivisi);
         rvAsset = findViewById(R.id.rvAsset);
+
+        etSearch = findViewById(R.id.etSearch);
+        containerSearch = findViewById(R.id.containerSearch);
 
         // ===== RecyclerView =====
         assetList = new ArrayList<>();
@@ -76,15 +89,62 @@ public class MaintenanceActivity extends BaseActivity {
 
         icDropdownDivisi.setOnClickListener(v -> showDivisiDropdown());
 
+        containerSearch.setOnClickListener(v -> activateSearch());
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.filterByPic(s.toString());
+                adapter.setSearchKeyword(s.toString());
+            }
+
+            @Override public void afterTextChanged(Editable s) {}
+        });
+
+        etSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH) {
+
+                // Tutup keyboard
+                InputMethodManager imm =
+                        (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(etSearch.getWindowToken(), 0);
+                }
+
+                if (adapter.getItemCount() == 0) {
+                    Toast.makeText(this,
+                            "Tidak ada asset yang sesuai dengan PIC",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                return true;
+            }
+            return false;
+        });
+
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Intent intent = new Intent(MaintenanceActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
-        finish();
+        if (isSearchActive) {
+            isSearchActive = false;
+
+            InputMethodManager imm =
+                    (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(etSearch.getWindowToken(), 0);
+            }
+
+            etSearch.clearFocus();
+        } else {
+            super.onBackPressed();
+            Intent intent = new Intent(MaintenanceActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intent);
+            finish();
+        }
     }
 
 
@@ -175,6 +235,22 @@ public class MaintenanceActivity extends BaseActivity {
         Volley.newRequestQueue(this).add(request);
     }
 
+    private void activateSearch() {
+        if (isSearchActive) return;
+
+        isSearchActive = true;
+        etSearch.setEnabled(true);
+        etSearch.setFocusableInTouchMode(true);
+        etSearch.requestFocus();
+
+        // ⌨️ Paksa keyboard muncul
+        InputMethodManager imm =
+                (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null) {
+            imm.showSoftInput(etSearch, InputMethodManager.SHOW_IMPLICIT);
+        }
+    }
+
     // ===== LOAD ASSET =====
     private void loadAsset() {
         StringRequest request = new StringRequest(
@@ -197,6 +273,7 @@ public class MaintenanceActivity extends BaseActivity {
                                     obj.getString("nama_jenis"),
                                     obj.getString("kondisi_asset"),
                                     obj.getString("kendala_asset"),
+                                    obj.getString("status_penggunaan"),
                                     obj.getString("pic_asset"),
                                     selectedIdDivisi
                             ));

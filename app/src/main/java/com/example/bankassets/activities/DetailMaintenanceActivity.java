@@ -53,6 +53,8 @@ public class DetailMaintenanceActivity extends BaseActivity {
         TextView tvSpesifikasi = findViewById(R.id.tvSpesifikasiAsset);
         TextView tvKondisi = findViewById(R.id.etKondisiAsset);
         TextView tvKendala = findViewById(R.id.etKendala);
+        TextView tvStatusPenggunaan = findViewById(R.id.etStatusPenggunaan);
+        TextView tvPic = findViewById(R.id.etPic);
         fabAdd = findViewById(R.id.fabAddMaintenance);
         icDeleteMaintenance = findViewById(R.id.icDeleteMaintenance);
         icDeleteMaintenance.setVisibility(View.GONE);
@@ -72,8 +74,13 @@ public class DetailMaintenanceActivity extends BaseActivity {
         tvNamaAsset.setText(asset.getNama());
         tvSpesifikasi.setText(asset.getSpesifikasi());
         tvKondisi.setText(asset.getKondisi());
+
         KondisiAssetColor.setKondisiColor(tvKondisi, asset.getKondisi());
+        KondisiAssetColor.setStatusPenggunaanColor(tvStatusPenggunaan, asset.getStatusPenggunaan());
+
         tvKendala.setText(asset.getKendala());
+        tvStatusPenggunaan.setText(asset.getStatusPenggunaan());
+        tvPic.setText(asset.getPic());
 
         RecyclerView rv = findViewById(R.id.rvMaintenance);
         rv.setLayoutManager(new LinearLayoutManager(this));

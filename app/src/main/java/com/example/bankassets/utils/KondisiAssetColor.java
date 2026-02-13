@@ -20,6 +20,21 @@ public class KondisiAssetColor {
                 tv.setBackgroundResource(R.drawable.bg_status_red);
                 tv.setTextColor(Color.parseColor("#D32F2F"));
                 break;
+            case "Gudang":
+                tv.setBackgroundResource(R.drawable.bg_status_pink);
+                tv.setTextColor(Color.parseColor("#613B9E"));
+                break;
+        }
+    }
+
+    public static void setStatusPenggunaanColor(TextView tv, String status) {
+        switch (status) {
+            case "Aktif":
+                tv.setBackgroundResource(R.drawable.bg_status_biru);
+                break;
+            case "Nonaktif":
+                tv.setBackgroundResource(R.drawable.bg_status_yellow);
+                break;
         }
     }
 }

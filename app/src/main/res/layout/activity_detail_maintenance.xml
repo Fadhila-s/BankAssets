@@ -69,6 +69,57 @@
                         android:text="Intel i7, 16GB RAM, 512GB SSD"
                         android:textSize="13sp"
                         android:textColor="@color/text_grey"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#E0E0E0"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tvPic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginRight="5dp"
+                            android:text="Person In Change:"
+                            android:textColor="@color/text"
+                            android:textSize="13sp"/>
+                        <TextView
+                            android:id="@+id/etPic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lis Yuliana"
+                            android:textColor="@color/text"
+                            android:textSize="13sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tvStatusPenggunaan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginRight="5dp"
+                            android:text="Status Penggunaan:"
+                            android:textColor="@color/text"
+                            android:textSize="13sp"/>
+                        <TextView
+                            android:id="@+id/etStatusPenggunaan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Aktif"
+                            android:padding="10dp"
+                            android:textColor="#000000"
+                            android:textSize="13sp"/>
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

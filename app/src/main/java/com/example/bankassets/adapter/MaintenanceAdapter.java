@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bankassets.R;
@@ -32,6 +36,7 @@ public class MaintenanceAdapter extends RecyclerView.Adapter<MaintenanceAdapter.
 
     private AssetModel selectedAsset = null;
 
+    private String searchKeyword = "";
     public MaintenanceAdapter(Context context, ArrayList<AssetModel> data) {
         this.context = context;
         setData(data);
@@ -65,10 +70,13 @@ public class MaintenanceAdapter extends RecyclerView.Adapter<MaintenanceAdapter.
         holder.tvSpesifikasi.setText(model.getSpesifikasi());
         holder.tvKendala.setText(model.getKendala());
         holder.tvKondisi.setText(model.getKondisi());
+        holder.tvStatusPenggunaan.setText(model.getStatusPenggunaan());
         holder.tvPic.setText(model.getPic());
 
         // Status color
         KondisiAssetColor.setKondisiColor(holder.tvKondisi, model.getKondisi());
+
+        KondisiAssetColor.setStatusPenggunaanColor(holder.tvStatusPenggunaan, model.getStatusPenggunaan());
 
         // Edit kondisi
         holder.ubahKondisiAsset.setOnClickListener(v -> {
@@ -76,6 +84,7 @@ public class MaintenanceAdapter extends RecyclerView.Adapter<MaintenanceAdapter.
             intent.putExtra("id_asset", model.getId());
             intent.putExtra("kondisi_asset", model.getKondisi());
             intent.putExtra("kendala_asset", model.getKendala());
+            intent.putExtra("status_penggunaan", model.getStatusPenggunaan());
             intent.putExtra("pic_asset", model.getPic());
             ((Activity) context).startActivityForResult(intent, 101);
         });
@@ -86,6 +95,64 @@ public class MaintenanceAdapter extends RecyclerView.Adapter<MaintenanceAdapter.
             intent.putExtra("asset", model);
             context.startActivity(intent);
         });
+
+        // ===== HIGHLIGHT =====
+        if (selectedAsset != null
+                && selectedAsset.getId().equals(model.getId())) {
+            holder.cardRoot.setCardBackgroundColor(
+                    ContextCompat.getColor(context, R.color.surface)
+            );
+        } else {
+            holder.cardRoot.setCardBackgroundColor(
+                    ContextCompat.getColor(context, R.color.bg_card)
+            );
+        }
+
+        String pic = model.getPic();
+
+        if (!searchKeyword.isEmpty() && pic.toLowerCase().contains(searchKeyword)) {
+
+            SpannableString spannable = new SpannableString(pic);
+            int start = pic.toLowerCase().indexOf(searchKeyword);
+            int end = start + searchKeyword.length();
+
+            spannable.setSpan(
+                    new ForegroundColorSpan(
+                            ContextCompat.getColor(context, R.color.primaryBlue)
+                    ),
+                    start,
+                    end,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            );
+
+            holder.tvPic.setText(spannable);
+
+        } else {
+            holder.tvPic.setText(pic);
+        }
+    }
+
+    public void setSearchKeyword(String keyword) {
+        this.searchKeyword = keyword == null ? "" : keyword.toLowerCase().trim();
+        notifyDataSetChanged();
+    }
+
+    public void filterByPic(String keyword) {
+        searchKeyword = keyword == null ? "" : keyword.toLowerCase().trim();
+        listDisplay.clear();
+
+        if (searchKeyword.isEmpty()) {
+            listDisplay.addAll(listAll);
+        } else {
+            for (AssetModel a : listAll) {
+                if (a.getPic() != null &&
+                        a.getPic().toLowerCase().contains(searchKeyword)) {
+                    listDisplay.add(a);
+                }
+            }
+        }
+
+        notifyDataSetChanged();
     }
 
     @Override
@@ -95,7 +162,7 @@ public class MaintenanceAdapter extends RecyclerView.Adapter<MaintenanceAdapter.
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         CardView cardRoot;
-        TextView tvNama, tvSpesifikasi, tvKendala, tvPic, tvKondisi, tvJenis;
+        TextView tvNama, tvSpesifikasi, tvKendala, tvPic, tvKondisi, tvStatusPenggunaan, tvJenis;
         ImageView ubahKondisiAsset;
 
         ViewHolder(@NonNull View itemView) {
@@ -106,6 +173,7 @@ public class MaintenanceAdapter extends RecyclerView.Adapter<MaintenanceAdapter.
             tvKendala = itemView.findViewById(R.id.etKendala);
             tvPic = itemView.findViewById(R.id.etPic);
             tvKondisi = itemView.findViewById(R.id.etKondisiAsset);
+            tvStatusPenggunaan = itemView.findViewById(R.id.etStatusPenggunaan);
             tvJenis = itemView.findViewById(R.id.tvJenisAsset);
             ubahKondisiAsset = itemView.findViewById(R.id.ubahKondisiAsset);
         }

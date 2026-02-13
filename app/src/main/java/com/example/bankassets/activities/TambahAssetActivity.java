@@ -26,11 +26,12 @@ import java.util.Map;
 public class TambahAssetActivity extends BaseActivity {
 
     private TextInputEditText etNamaAsset, etSpesifikasi, etKendala, etPic;
-    private MaterialAutoCompleteTextView ddJenisAsset, ddKondisiAsset;
+    private MaterialAutoCompleteTextView ddJenisAsset, ddKondisiAsset, ddStatusPenggunaan;
     private MaterialButton btnSimpan;
 
     private ImageView icDropdownJenisAsset;
     private ImageView icDropdownKondisi;
+    private ImageView icDropdownStatusPenggunaan;
 
     private String idDivisi;
 
@@ -55,10 +56,12 @@ public class TambahAssetActivity extends BaseActivity {
 
         ddJenisAsset   = findViewById(R.id.etJenisAsset);
         ddKondisiAsset = findViewById(R.id.etKondisiAsset);
+        ddStatusPenggunaan = findViewById(R.id.etStatusPenggunaan);
 
         btnSimpan = findViewById(R.id.btnAdd);
         icDropdownJenisAsset = findViewById(R.id.icDropdownJenisAsset);
         icDropdownKondisi = findViewById(R.id.icDropdownKondisi);
+        icDropdownStatusPenggunaan = findViewById(R.id.icDropdownStatusPenggunaan);
 
 
         // ===== Ambil id_divisi =====
@@ -75,6 +78,8 @@ public class TambahAssetActivity extends BaseActivity {
         // ✅ KLIK ICON UNTUK BUKA DROPDOWN
         icDropdownJenisAsset.setOnClickListener(v -> ddJenisAsset.showDropDown());
         icDropdownKondisi.setOnClickListener(v -> ddKondisiAsset.showDropDown());
+        icDropdownStatusPenggunaan.setOnClickListener(v -> ddStatusPenggunaan.showDropDown());
+
 
         btnSimpan.setOnClickListener(v -> simpanAsset());
     }
@@ -106,12 +111,20 @@ public class TambahAssetActivity extends BaseActivity {
         });
 
         // ===== Kondisi Asset =====
-        String[] kondisiAsset = {"Baik", "Peringatan", "Kritis"};
+        String[] kondisiAsset = {"Baik", "Peringatan", "Kritis", "Gudang"};
 
         ddKondisiAsset.setAdapter(
                 new ArrayAdapter<>(this,
                         android.R.layout.simple_dropdown_item_1line,
                         kondisiAsset)
+        );
+
+        String[] statusPenggunaan = {"Aktif", "Nonaktif"};
+
+        ddStatusPenggunaan.setAdapter(
+                new ArrayAdapter<>(this,
+                        android.R.layout.simple_dropdown_item_1line,
+                        statusPenggunaan)
         );
     }
 
@@ -121,6 +134,8 @@ public class TambahAssetActivity extends BaseActivity {
         String kendala= etKendala.getText().toString().trim();
         String pic    = etPic.getText().toString().trim();
         String kondisi= ddKondisiAsset.getText().toString().trim();
+        String status = ddStatusPenggunaan.getText().toString().trim();
+
 
         if (nama.isEmpty() || idJenisTerpilih == null || kondisi.isEmpty()) {
             Toast.makeText(this, "Lengkapi semua field wajib", Toast.LENGTH_SHORT).show();
@@ -157,6 +172,7 @@ public class TambahAssetActivity extends BaseActivity {
                 p.put("kendala_asset", kendala);
                 p.put("pic_asset", pic);
                 p.put("kondisi_asset", kondisi);
+                p.put("status_penggunaan", status);
                 p.put("id_jenis", idJenisTerpilih); // ✅ BENAR
                 return p;
             }

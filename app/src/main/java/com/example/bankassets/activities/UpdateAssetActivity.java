@@ -27,11 +27,13 @@ public class UpdateAssetActivity extends BaseActivity {
 
     private TextInputEditText etKendala;
     private MaterialAutoCompleteTextView ddKondisiAsset;
+    private MaterialAutoCompleteTextView ddStatusPenggunaan;
     private TextInputEditText etPic;
 
     private MaterialButton btnUpdate;
 
     private ImageView icDropdownKondisi;
+    private ImageView icStatusPenggunaan;
 
     private String idAsset;
 
@@ -47,9 +49,13 @@ public class UpdateAssetActivity extends BaseActivity {
         etKendala     = findViewById(R.id.etKendala);
         etPic         = findViewById(R.id.etPic);
         ddKondisiAsset = findViewById(R.id.etKondisiAsset);
+        ddStatusPenggunaan = findViewById(R.id.etStatusPenggunaan);
 
         btnUpdate = findViewById(R.id.btnSave);
         icDropdownKondisi = findViewById(R.id.icDropdownKondisi);
+        icStatusPenggunaan = findViewById(R.id.icDropdownStatusPenggunaan);
+
+        // ===== Ambil id_asset =====
 
         idAsset = getIntent().getStringExtra("id_asset");
 
@@ -65,28 +71,47 @@ public class UpdateAssetActivity extends BaseActivity {
                 getIntent().getStringExtra("kondisi_asset"),
                 false
         );
+        ddStatusPenggunaan.setText(
+                getIntent().getStringExtra("status_penggunaan"),
+                false
+        );
 
         setupDropdown();
         // ✅ KLIK ICON UNTUK BUKA DROPDOWN
         icDropdownKondisi.setOnClickListener(v -> ddKondisiAsset.showDropDown());
+        icStatusPenggunaan.setOnClickListener(v -> ddStatusPenggunaan.showDropDown());
+
 
         btnUpdate.setOnClickListener(v -> updateAsset());
     }
 
     private void setupDropdown() {
         // ===== Kondisi Asset =====
-        String[] kondisiAsset = {"Baik", "Peringatan", "Kritis"};
+        String[] kondisiAsset = {"Baik", "Peringatan", "Kritis", "Gudang"};
 
         ddKondisiAsset.setAdapter(
                 new ArrayAdapter<>(this,
                         android.R.layout.simple_dropdown_item_1line,
                         kondisiAsset)
         );
+
+        String[] statusPenggunaan = {"Aktif", "Nonaktif"};
+
+        ddStatusPenggunaan.setAdapter(
+                new ArrayAdapter<>(this,
+                        android.R.layout.simple_dropdown_item_1line,
+                        statusPenggunaan)
+        );
     }
 
     private void updateAsset() {
         if (ddKondisiAsset.getText().toString().isEmpty()) {
             Toast.makeText(this, "Pilih kondisi asset", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (ddStatusPenggunaan.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Pilih status penggunaan", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -115,6 +140,7 @@ public class UpdateAssetActivity extends BaseActivity {
                 params.put("id_asset", idAsset);
                 params.put("kondisi_asset", ddKondisiAsset.getText().toString());
                 params.put("kendala_asset", etKendala.getText().toString());
+                params.put("status_penggunaan", ddStatusPenggunaan.getText().toString());
                 params.put("pic_asset", etPic.getText().toString());
                 return params;
             }

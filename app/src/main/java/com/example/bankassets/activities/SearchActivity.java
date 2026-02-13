@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -118,8 +119,6 @@ public class SearchActivity extends BaseActivity {
             }
             return false;
         });
-
-        containerSearch.setOnClickListener(v -> activateSearch());
     }
 
     @Override
@@ -264,6 +263,7 @@ public class SearchActivity extends BaseActivity {
                                     obj.getString("nama_jenis"),
                                     obj.getString("kondisi_asset"),
                                     obj.getString("kendala_asset"),
+                                    obj.getString("status_penggunaan"),
                                     obj.getString("pic_asset"),
                                     selectedIdDivisi
                             ));
