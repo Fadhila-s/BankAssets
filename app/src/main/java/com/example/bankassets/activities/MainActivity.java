@@ -195,7 +195,7 @@ public class MainActivity extends BaseActivity {
                         e.printStackTrace();
                     }
                 },
-                error -> Toast.makeText(this, "Gagal load cabang", Toast.LENGTH_SHORT).show()
+                error -> Toast.makeText(this, "Gagal load kantor", Toast.LENGTH_SHORT).show()
         );
 
         Volley.newRequestQueue(this).add(request);
@@ -336,7 +336,7 @@ public class MainActivity extends BaseActivity {
                         e.printStackTrace();
                     }
                 },
-                error -> Toast.makeText(this, "Gagal ambil cabang", Toast.LENGTH_SHORT).show()
+                error -> Toast.makeText(this, "Gagal ambil kantor", Toast.LENGTH_SHORT).show()
         );
 
         Volley.newRequestQueue(this).add(request);
@@ -396,7 +396,7 @@ public class MainActivity extends BaseActivity {
 
     // ================= DIALOG FAB =================
     private void showAddDialog() {
-        String[] options = {"Tambah Cabang", "Tambah Divisi"};
+        String[] options = {"Tambah Kantor", "Tambah Divisi"};
 
         new AlertDialog.Builder(this)
                 .setTitle("Pilih Aksi")
@@ -410,7 +410,7 @@ public class MainActivity extends BaseActivity {
                     } else {
                         // Tambah Divisi
                         if (selectedCabangId == null) {
-                            Toast.makeText(this, "Pilih cabang dulu", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Pilih kantor dulu", Toast.LENGTH_SHORT).show();
                             return;
                         }
 

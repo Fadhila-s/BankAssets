@@ -87,11 +87,11 @@ public class TambahCabangActivity extends BaseActivity {
                 Db_Contract.urlAddCabang,
                 response -> {
                     if (response.equals("success")) {
-                        Toast.makeText(this, "Cabang berhasil ditambahkan", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Kantor berhasil ditambahkan", Toast.LENGTH_SHORT).show();
                         setResult(RESULT_OK); // ⬅️ penting
                         finish();
                     } else {
-                        Toast.makeText(this, "Gagal menambah cabang", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Gagal menambah kantor", Toast.LENGTH_SHORT).show();
                     }
                 },
                 error -> Toast.makeText(this, "Error koneksi", Toast.LENGTH_SHORT).show()

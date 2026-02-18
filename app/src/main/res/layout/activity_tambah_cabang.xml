@@ -45,7 +45,7 @@
                 android:id="@+id/namaCabang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cabang 1 - Pusat"
+                android:text="Nama Kantor"
                 android:textColor="@color/text"
                 android:textSize="14sp"/>
 
@@ -53,7 +53,7 @@
                 android:id="@+id/alamatCabang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Jl. Sudirman No.123, Sragen"
+                android:text="Alamat Kantor"
                 android:textSize="12sp"
                 android:textColor="@color/text_grey"/>
         </LinearLayout>
@@ -79,7 +79,7 @@
 
             <!-- Title -->
             <TextView
-                android:text="Add Your Branch Office!"
+                android:text="Add Office!"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/text"
@@ -99,7 +99,7 @@
                     android:id="@+id/etNamaCabang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nama cabang"
+                    android:hint="Nama kantor"
                     android:inputType="textPersonName"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,7 +114,7 @@
                     android:id="@+id/etAlamatCabang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Alamat Cabang"
+                    android:hint="Alamat kantor"
                     android:inputType="text"/>
             </com.google.android.material.textfield.TextInputLayout>
 

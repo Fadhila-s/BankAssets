@@ -1,7 +1,7 @@
 package com.example.bankassets;
 
 public class Db_Contract {
-    public static String ip = "192.168.20.149";
+    public static String ip = "192.168.20.153";
 
     public static final String urlRegister = "http://"+ip+"//bank_assets/api-register.php";
     public static final String urlLogin = "http://"+ip+"//bank_assets/api-login.php";
